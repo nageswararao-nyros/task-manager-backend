@@ -48,7 +48,7 @@ exports.save_user = (req, res) =>{
 
 exports.confirm_user = (req, res) =>{
 
-  user.findOne({_id: req.params.user_id}, function(err, user){
+  users.findOne({_id: req.params.user_id}, function(err, user){
     if(user && !user.verified ){
       users.updateOne({_id:req.params.user_id},{$set:{ verified: true}}, function(err, update_user){
         res.render('../views/confirmations/user_confirmation')

@@ -19,3 +19,24 @@ exports.edit_task = (req, res)=>{
 		})
 	})
 }
+
+exports.update_task = (req, res)=>{
+    tasks.updateOne({_id:req.params.task_id},{$set:{
+    	status: req.body.status
+    }}, function(err, update_task){
+      console.log(err, update_task)
+      if(update_task && update_task.nModified === 1){
+        console.log("Status success")
+        res.json({
+          status: 200,
+          message: "Updated successfully"
+          });
+      }else{
+        console.log(err, "11111111111111")
+        res.json({
+          status: 400,
+          message: "Task Not Updated"
+          });
+      }
+    })
+}

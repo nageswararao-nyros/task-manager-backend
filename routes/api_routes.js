@@ -12,7 +12,6 @@ router.route('/signUp').post(usersController.save_user)
 // My Tasks
 router.route('/my-tasks').post(userController.getAllMyTasks)
 router.route('/task/:task_id').get(userController.edit_task)
-
-
+router.route('/task/:task_id/update').post(userController.update_task)
 
 module.exports = router;

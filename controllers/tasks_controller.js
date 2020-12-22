@@ -10,3 +10,12 @@ exports.getAllMyTasks = (req, res)=>{
 		})
 	})
 }
+
+exports.edit_task = (req, res)=>{
+	tasks.findOne({_id: req.params.task_id}, function(err, task){
+		res.json({
+			status: 200,
+			data: task
+		})
+	})
+}

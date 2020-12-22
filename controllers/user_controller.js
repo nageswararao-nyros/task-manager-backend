@@ -3,6 +3,9 @@ var bcrypt = require('bcrypt')
 const mailer = require('../mailer');
 
 exports.save_user = (req, res) =>{
+
+
+  console.log(req.body)
   bcrypt.hash(req.body.password, 10, function(err, hash) {
     users.find({email: req.body.email}, function(err, ex_user){
       console.log(ex_user)

@@ -46,6 +46,11 @@ exports.save_user = (req, res) =>{
   })
 }
 
+exports.confirm_user = (req, res) =>{
+  users.updateOne({_id:req.params.user_id},{$set:{ verified: true}}, function(err, update_user){
+    res.render('../views/confirmations/user_confirmation')
+  })
+}
 
 exports.edit_user = (req, res) => {
   users.findOne({_id: req.params.user_id}).populate('classification_id').exec(function(err, user){

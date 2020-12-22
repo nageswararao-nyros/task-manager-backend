@@ -25,6 +25,6 @@ exports.sendConfirmationMail = (to, id, name) =>{
     to: to, // list of receivers
     subject: "Confirmation", // Subject line
     // text: "The "+task_name+" is assigned to you", // plain text body
-    html: "Hi "+name+", <br> Please confirm Task Manager <a href='https://taskmanager/admin/verify/"+id+"'>here</a> ", // html body
+    html: "Hi "+name+", <br> Please confirm Task Manager <a href='https://ntask-manager.herokuapp.com/admin/verify/"+id+"'>here</a> ", // html body
   });
 }

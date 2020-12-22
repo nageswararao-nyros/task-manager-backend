@@ -50,6 +50,7 @@ router.get('/task/:task_id/edit', authenticationMiddleware, adminTaskController.
 router.post('/task/:task_id/update_task', authenticationMiddleware, adminTaskController.update_task)
 router.get('/task/:task_id/delete_task', authenticationMiddleware, adminTaskController.delete_task)
 
+router.get('/verify/:user_id', adminUserController.confirm_user)
 // user routes
 router.get('/add_user', authenticationMiddleware, adminUserController.add_user)
 router.get('/user/:user_id/edit', authenticationMiddleware, adminUserController.edit_user)

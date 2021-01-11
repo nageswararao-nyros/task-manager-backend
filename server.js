@@ -51,7 +51,6 @@ bcrypt.hash(password, 10, function(err, hash) {
 			})
 		}
 	})
-    
 });
 
 app.use(passport.initialize());
@@ -66,8 +65,10 @@ mongoose.connection.once('open', function () {
 
 app.use(express.static(path.join(__dirname, './admin')));
 // app.use(express.static(path.join(__dirname, './images')));
+app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './public/admin_assets')));
 
-// app.use(express.static(path.join(__dirname, './admin/admin_assets')))
+app.use(express.static(path.join(__dirname, './admin/assets/admin_assets')))
 
 app.set('views', path.join(__dirname, './admin/views'));
 app.set('view engine','ejs'); 
@@ -89,7 +90,7 @@ app.use('/admin', admin_routes)
 const http=require('http');
 
 const server = http.Server(app)
-const port = process.env.PORT || 3002
+const port = process.env.PORT || 5000
 app.listen(port, function () {
    console.log('app listening on port '+port+'')
 })

@@ -14,7 +14,39 @@
 	<div style="padding: 30px;">
 		<div align="right"><a href="/admin/add_task" class="btn btn-primary">Add Task</a></div>
 		<br /><br />
-		<table class="table table-striped table-bordered table-hover">
+		<form id="filters_form">
+			<table>
+				<tbody class="filter">
+					<tr>
+						<td>
+							<td class="labl">Title:</td>
+			                <td class="input-group" style="margin-right: 20px;">
+			                 <input type="text" column='1' class="form-control" name="title">
+			                </td>
+						</td>
+						<td style="margin-left: 20px;">
+							<td class="labl">Assigned To:</td>
+			                <td class="input-group" style="margin-right: 20px;">
+			                 <input type="text" column='3' class="form-control" name="assign">
+			                </td>
+						</td>
+						<td>
+						<td class="labl">Type:</td>
+						<td class="input-group" style="margin-right: 20px;">
+	                    	<select  class="form-control" id="status" column='4' style="border-radius: 0px; width: 250px;" name="status">
+		                      <option value="">Select</option>
+		                      <option value="Yet to start">Yet to Start</option>
+		                      <option value="InProgress">InProgress</option>
+		                      <option value="Done">Done</option>
+		                    </select>
+	                    </td>
+	                  </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+		<table id="dataTables-example" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>S.No</th>
@@ -68,6 +100,11 @@
     </div>
 </div>
 
+
+ <script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script> 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -76,17 +113,59 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script src="/admin_assets/js/jquery.tableToExcel.js"></script>
+
+
+
+ <!-- DataTables JavaScript -->
+<script src="/admin_assets/js/plugins/custom-select/jquery-customselect.js"></script>
+<script src="/admin_assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/admin_assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="/admin_assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script type="text/javascript" src='/admin_assets/js/custom_scripts/skills.js'></script> 
+<!-- export the skills into excel sheet -->
+<script src="/admin_assets/js/jquery.tableToExcel.js"></script>
 
 <script type="text/javascript">
 	function getMeetingQR(id){
 		window.location.href = '/admin/'+id+'/generateQR'
 	}
 
+	$(document).ready(function() {
+		var table = $('#dataTables-example').DataTable({
+        // responsive: true,
+	        search:{
+	          search: ""
+	        },
+	        "aaSorting": [],
+	       
+	    });
+	    $('.filter input').on( 'keyup', function () {
+	        var column = $(this).attr("column");
+	        table
+	          .columns( column )
+	          .search( this.value )
+	          .draw();
+	    });
+
+	    $('#status').on('change', function () {
+	        var column = $(this).attr("column");          
+	        table
+	          .columns( column )
+	          .search( this.value )
+	          .draw();
+	    });
+	})
+
 	function openModal(id, name){
 		$('#del_id').val(id)
 		$('#meeting_name_modal').html(name)
 		console.log(id,name)
 	}
+
+	
+
+	
 
 	function delCarousel(){
 		var id = $('#del_id').val()

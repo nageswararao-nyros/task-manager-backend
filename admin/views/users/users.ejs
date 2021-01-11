@@ -13,6 +13,33 @@
 		<div style="padding: 30px">
 		<div align="right"><a href="/admin/add_user" class="btn btn-primary">Add User</a></div>
 		<br /><br />
+		<form id="filters_form">
+			<table>
+				<tbody class="filter">
+					<tr>
+						<td>
+							<td class="labl">First Name:</td>
+			                <td class="input-group" style="margin-right: 20px;">
+			                 <input type="text" column='1' class="form-control" name="title">
+			                </td>
+						</td>
+						<td style="margin-left: 20px;" >
+							<td class="labl">Last Name:</td>
+			                <td class="input-group" style="margin-right: 20px;">
+			                 <input type="text" column='2' class="form-control" name="assign">
+			                </td>
+						</td>
+						<td style="margin-left: 20px;">
+							<td class="labl">Phone:</td>
+			                <td class="input-group" style="margin-right: 20px;">
+			                 <input type="text" column='4' class="form-control" name="assign">
+			                </td>
+						</td>
+						<td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 		<table id="users_table" style="margin-top: 20px;" width="100%" class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -65,22 +92,30 @@
 
 	</div>
 </div>
+ <script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script> 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> 
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<script src="/assets/admin_assets/js/plugins/custom-select/jquery-customselect.js"></script>
-
-<script src="/assets/admin_assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
-
-<script src="/assets/admin_assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-
-<script src="/assets/admin_assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-<link rel="stylesheet" type="text/css" href="/assets/admin_assets/custom.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="/admin_assets/js/jquery.tableToExcel.js"></script>
+
+
+
+ <!-- DataTables JavaScript -->
+<script src="/admin_assets/js/plugins/custom-select/jquery-customselect.js"></script>
+<script src="/admin_assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/admin_assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="/admin_assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script type="text/javascript" src='/admin_assets/js/custom_scripts/skills.js'></script> 
+<!-- export the skills into excel sheet -->
+<script src="/admin_assets/js/jquery.tableToExcel.js"></script>
 
 <style type="text/css">
 	.dataTables_filter{
@@ -90,10 +125,31 @@
 	}
 </style>
 <script type="text/javascript">
-	 $(document).ready(function () {
-	 			console.log("FFFFFFFFFFFFFFFFFF")
-        $('#users_table').DataTable();
-    });
+
+	 $(document).ready(function() {
+		var table = $('#users_table').DataTable({
+	        search:{
+	          search: ""
+	        },
+	        "aaSorting": [],
+	       
+	    });
+	    $('.filter input').on( 'keyup', function () {
+	        var column = $(this).attr("column");
+	        table
+	          .columns( column )
+	          .search( this.value )
+	          .draw();
+	    });
+
+	    $('#status').on('change', function () {
+	        var column = $(this).attr("column");          
+	        table
+	          .columns( column )
+	          .search( this.value )
+	          .draw();
+	    });
+	})
 	function openDeleteModal(name,id){
 		$('#del_user').val(id)
 		$('#user_name').html(name)

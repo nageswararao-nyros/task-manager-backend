@@ -1,0 +1,97 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/admin">Task Manager</a>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a href="/admin/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        </li>
+    </ul>
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li  id="notifications_block">
+                    <a class="parent_element_individual" id="par_dash" href="/admin"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</a>
+                </li>
+                <li id="roles_block" >
+                    <a class="parent_element_individual" id="par_task" href="/admin/all_tasks"><i class="fa fa-tasks marg_rht" aria-hidden="true"></i> Tasks</a>
+                </li>
+                <li id="roles_block" >
+                    <a class="parent_element_individual" id="par_user" href="/admin/users"><i class="fa fa-user marg_rht" aria-hidden="true"></i> Users</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+<script src="/admin_assets/vendor/bootstrap/css/bootstrap.min.css"></script>
+<script src="/admin_assets/vendor/jquery/jquery.min.js"></script>
+
+<style>
+  .active{
+    background-color: #5db951;
+    color: #fff;
+  }
+
+  .active a {
+  	color: #fff !important;
+  }
+
+  .nav a{
+  	color: #5db951;
+  }
+
+  .nav a:hover{
+  	color: #5db951;
+  }
+
+  .in{
+    display: block;
+  }
+</style>
+<script type="text/javascript">
+  $("ul.nav li").click(function(event){
+    var name = $(this).attr("id")
+    sessionStorage.setItem("parent", name)
+  })
+
+  $('.child_block').click(function(){
+    var child_name = $(this).attr("id")
+    sessionStorage.removeItem("individual_parent")
+    sessionStorage.setItem("child", child_name)
+  })
+
+  $(document).ready(function(){
+    var nav = sessionStorage.getItem("parent")
+    var child_nav = sessionStorage.getItem("child")
+    var parent_ind = sessionStorage.getItem("individual_parent")
+    if(parent_ind){
+      $("[id*="+parent_ind+"]").parent().addClass('active');
+    }
+    if(child_nav){
+      $("[id*="+child_nav+"]").parent().addClass('active');
+      $("[id*="+child_nav+"]").parent().parent().addClass('in');
+    }
+
+  })
+
+  $('.parent_element_individual').click(function(){
+    sessionStorage.clear();
+    var ind_parent = $(this).attr('id')
+    sessionStorage.setItem("individual_parent", ind_parent)
+  })
+
+  $('.test_name').click(function(){
+    $('.test_name').toggle();
+  })
+
+
+</script>

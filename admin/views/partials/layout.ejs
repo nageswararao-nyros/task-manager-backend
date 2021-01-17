@@ -1,55 +1,28 @@
-<div class="side-bar">
-	<div align="center" class="logo_block">
-		<img src="/assets/task_logo.png" height="80" width="80" style="margin-top: 10%;">
-		<h3 style="color: #ffffff; font-weight: bold;">Task Manager</h3>
-	</div>
-	<div class="nav_opt_blk">
-		<ul style="padding: 0">
-			<a style="text-decoration: none; color: white;"  href="/admin">
-				<li id="dashboard" onclick="onRouteClick(this)" class="nav_item">Dashboard
-					<span>
-						<i class="fa fa-angle-right" style="font-size:24px; position: absolute; right: 10px;">
-						</i>
-					</span>
-				</li>
-			</a>
-			<a style="text-decoration: none; color: white;" href="/admin/all_tasks">
-				<li id="meetings" onclick="onRouteClick(this)"  class="nav_item">Task Management
-					<span>
-						<i class="fa fa-angle-right" style="font-size:24px; position: absolute; right: 10px;"></i>
-					</span>
-				</li>
-			</a>
-			<a style="text-decoration: none; color: white;" href="/admin/users">
-				<li id="users" onclick="onRouteClick(this)"  class="nav_item">User Management
-					<span>
-						<i class="fa fa-angle-right" style="font-size:24px; position: absolute; right: 10px;"></i>
-					</span>
-				</li>
-			</a>
-		</ul>
-	</div>
-</div>
-<style type="text/css">
-	.active_item{
-		background-color: white !important;
-		color: black !important;
-	}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var item = localStorage.getItem('nav_item')
-		console.log(item)
-		$("[id*="+item+"]").addClass('active_item');
-	})
-	function onRouteClick(item){
-		// console.log("sssssssssss")
-		var item = $(item).attr("id")
-		localStorage.setItem('nav_item', item)
-		// console.log(item)
-	}
-</script>
+<!doctype html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <link rel="shortcut icon" href="/admin_assets/images/favicon.ico">
+  <link href="/admin_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/css/style.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/dist/css/sb-admin-2.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/vendor/morrisjs/morris.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" media="all">
+  <link href="/admin_assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/admin_assets/css/includes/pnotify.css" media="all" rel="stylesheet" type="text/css" />
+  
+  <link rel="stylesheet" href="/admin_assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" media="all">
+  <link rel="stylesheet" href="/admin_assets/css/includes/bootstrap-datepicker.css" />
 
-<link rel="stylesheet" type="text/css" href="/assets/admin_assets/custom.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/admin_assets/css/includes/jquery-ui.1.11.2.min.css" rel="stylesheet" media="all"/> 
+  <link rel="stylesheet" type="text/css" href="/admin_assets/js/plugins/custom-select/jquery-customselect.css">
+  <link rel="manifest" href="/manifest.json" />
+  <script src="/admin_assets/js/includes/OneSignalSDK.js" async=""></script>
+</head>
+<body>
+  <div id="wrapper">
+  	<%- include('../partials/Sidebar') %>
+    <div id="page-wrapper">
+
